@@ -2,9 +2,9 @@
   "name": "ra-bosa-noga",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://netology-code.github.io/ra-17-Advokate47/",
+  "homepage": "https://advokate47.github.io/reactdiploma/",
   "dependencies": {
-    "gh-pages": "^2.0.1",
+    "gh-pages": "^2.1.1",
     "querystring": "^0.2.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
