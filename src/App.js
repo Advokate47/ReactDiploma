@@ -18,7 +18,15 @@ class App extends Component {
       catalogueFilterParam: null,
       catalogueParam: null
     };
+    this.CarryedProductCard = this.bindProps(ProductCard, {	    // this.CarryedProductCard = this.bindProps(ProductCard, {
+      cartUploader: this.cartItemUploader,	    //   cartUploader: this.cartItemUploader,
+      filterParam: this.state.catalogueFilterParam,	    //   filterParam: this.state.catalogueFilterParam,
+      catalogueParam: this.state.catalogueParam,	    //   catalogueParam: this.state.catalogueParam,
+      filterLoader: this.mainMenuFilterLoader	    //   filterLoader: this.mainMenuFilterLoader
+    });
   };
+
+  
 
   componentDidMount() {
     const filters = dataLoader('filters');
@@ -84,11 +92,13 @@ class App extends Component {
     });
   };
 
+  bindProps = (Component, bindingProps) => (selfProps) => <Component {...bindingProps}{...selfProps} />;
+
 
   render() {
 
     const {categories, filters, catalogueParam, orderDetails, cartId, catalogueFilterParam, orderItems} = this.state;
-    const {mainMenuFilterLoader, cartItemUploader, orderDoneLoader} = this;
+    const {mainMenuFilterLoader, cartItemUploader, orderDoneLoader, CarryedProductCard} = this;
 
     return (
       <Router history={history}>
@@ -101,7 +111,7 @@ class App extends Component {
           <Route path='/favorite' exact component={Favorite} />
           <Route path='/order' exact component={(props) => <Order {...props} cartItems={orderItems} cartId={cartId} cartUploader={cartItemUploader} orderDone={orderDoneLoader}/>} />
           <Route path='/orderEnd' exact component={(props) => <OrderEnd {...props} orderDetails={orderDetails}/>} /> 
-          <Route path='/productCard/:id' exact component={(props) => <ProductCard {...props} cartUploader={cartItemUploader} filterParam={catalogueFilterParam} catalogueParam={catalogueParam} filterLoader={mainMenuFilterLoader}/>} />
+          <Route path='/productCard/:id' exact component={CarryedProductCard} />
           <Footer />
         </div>}
       </Router>
